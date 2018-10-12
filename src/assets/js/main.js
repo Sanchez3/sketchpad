@@ -11,10 +11,8 @@
 // import CSS
 // import animate_css from 'animate.css/animate.min.css';
 import css from '../css/css.css';
-import scss from '../css/sass.scss';
 
-
-// import Js Plugins/Entities
+import * as PIXI from 'pixi.js'
 
 //ES6 Module
 import Bar1 from './entities/Bar1';
@@ -24,6 +22,14 @@ var Bar2 = require('./entities/Bar2');
 
 
 window.h5 = {
+    initPixijs: function() {
+        var w= document.getElementById('canvas-wrapper').clientWidth;
+        var h= document.getElementById('canvas-wrapper').clientHeight;
+        console.log(w,h)
+        var sketchpad=new PIXI.Application(w,h,{backgroundColor:0xffffff});
+        document.getElementById('canvas-wrapper').appendChild(sketchpad.view);
+
+    },
     isPc: function() {
         var userAgentInfo = navigator.userAgent;
         var Agents = new Array('Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod');
@@ -43,7 +49,7 @@ window.h5 = {
             window.screen.height : window.innerHeight : window.innerHeight;
         // var wWidth = window.innerWidth;
         // var wHeight = window.innerHeight;
-        
+
         if (wWidth > wHeight) {
             wFsize = wHeight / 750 * 100;
         } else {
@@ -103,6 +109,7 @@ window.h5 = {
     init: function() {
         var that = this;
         that.cssInit().eventInit();
+        that.initPixijs()
     }
 };
 window.onload = function() {
